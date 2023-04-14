@@ -3,13 +3,11 @@ package com.madushan.Web.Based.Gem.Auction.Controller;
 import com.madushan.Web.Based.Gem.Auction.DTO.SellerDTO;
 import com.madushan.Web.Based.Gem.Auction.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/seller")
+@CrossOrigin
 public class SellerController {
 
     @Autowired
