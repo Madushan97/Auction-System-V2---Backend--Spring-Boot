@@ -49,7 +49,7 @@ const RegisterPage = () => {
   // POSt using axios
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post('http://localhost:8080/api/v1/seller', seller);
+    await axios.post('http://localhost:8088/api/v1/seller/saveseller', seller);
     navigate('/');
     console.log(seller);
   };

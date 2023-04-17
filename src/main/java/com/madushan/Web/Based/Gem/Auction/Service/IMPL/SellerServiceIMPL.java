@@ -7,7 +7,8 @@ import com.madushan.Web.Based.Gem.Auction.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Provider;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SellerServiceIMPL implements SellerService {
@@ -25,11 +26,36 @@ public class SellerServiceIMPL implements SellerService {
                 sellerDTO.getNIC(),
                 sellerDTO.getAddress(),
                 sellerDTO.getContactNumbers(),
-                sellerDTO.getEmail(),
-                sellerDTO.isActive()
+                sellerDTO.getEmail()
         );
 
         sellerRepository.save(seller);
         return null;
+    }
+
+    @Override
+    public List<SellerDTO> getSellers() {
+        List<Seller> allseller = sellerRepository.findAll();
+
+        if (allseller.size() > 0 ) {
+            List<SellerDTO> sellerDTOList = new ArrayList<>();
+
+            for (Seller seller : allseller) {
+                SellerDTO sellerDTO = new SellerDTO(
+                        seller.getSellerId(),
+                        seller.getFirstName(),
+                        seller.getLastName(),
+                        seller.getNIC(),
+                        seller.getAddress(),
+                        seller.getContactNumbers(),
+                        seller.getEmail()
+                );
+
+                sellerDTOList.add(sellerDTO);
+            }
+            return sellerDTOList;
+        } else {
+            throw new RuntimeException("No Sellers in database");
+        }
     }
 }

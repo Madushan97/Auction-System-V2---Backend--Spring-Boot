@@ -1,49 +1,55 @@
-import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-];
-
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+import { Sell } from '@mui/icons-material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export default function SellerList() {
+  const [sellers, setSellers] = useState([]);
+
+  useEffect(() => {
+    loadSellers();
+  }, []);
+
+  const loadSellers = async () => {
+    const result = await axios.get(
+      'http://localhost:8088/api/v1/seller/getallsellers'
+    );
+    setSellers(result.data);
+  };
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
+    <div className="container">
+      <div className="py-4">
+        <table className="table table-hover ">
+          <thead>
+            <tr className="table-dark">
+              <th scope="col">#</th>
+              <th scope="col">Seller Id</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">NIC</th>
+              <th scope="col">Address</th>
+              <th scope="col">Contact Numbers</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sellers.map((seller, index) => (
+              <tr>
+                <th scope="row" key={index}>
+                  {index + 1}
+                </th>
+                <td>{seller.sellerId}</td>
+                <td>{seller.firstName}</td>
+                <td>{seller.lastName}</td>
+                <td>{seller.nic}</td>
+                <td>{seller.address}</td>
+                <td>{seller.contactNumbers}</td>
+                <td>{seller.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
