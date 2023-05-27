@@ -22,7 +22,6 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Data
 public class Seller {
-
     @Id
     @Column(name = "seller_id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)

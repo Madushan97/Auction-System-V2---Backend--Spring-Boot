@@ -35,15 +35,15 @@ const RegisterPage = () => {
     firstName: '',
     lastName: '',
     NIC: '',
-    email: '',
     address: '',
-    contactNumbers: '',
+    contactNumbers: [''],
+    email: '',
   });
 
   const { firstName, lastName, NIC, email, address, contactNumbers } = seller;
 
-  const handleInputChange = (event) => {
-    setSeller({ ...seller, [event.target.name]: event.target.value });
+  const onInputChange = (e) => {
+    setSeller({ ...seller, [e.target.name]: e.target.value });
   };
 
   // POSt using axios
@@ -51,7 +51,6 @@ const RegisterPage = () => {
     event.preventDefault();
     await axios.post('http://localhost:8088/api/v1/seller/saveseller', seller);
     navigate('/');
-    console.log(seller);
   };
 
   return (
@@ -62,13 +61,13 @@ const RegisterPage = () => {
       >
         Seller Registration
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit}>
+      <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
         <TextField
           label="First Name"
           name="firstName"
           variant="outlined"
           value={firstName}
-          onChange={handleInputChange}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
@@ -76,7 +75,7 @@ const RegisterPage = () => {
           name="lastName"
           variant="outlined"
           value={lastName}
-          onChange={handleInputChange}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
@@ -84,7 +83,7 @@ const RegisterPage = () => {
           name="NIC"
           variant="outlined"
           value={NIC}
-          onChange={handleInputChange}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
@@ -92,7 +91,7 @@ const RegisterPage = () => {
           name="address"
           variant="outlined"
           value={address}
-          onChange={handleInputChange}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
@@ -100,7 +99,7 @@ const RegisterPage = () => {
           name="contactNumbers"
           variant="outlined"
           value={contactNumbers}
-          onChange={handleInputChange}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
@@ -109,28 +108,9 @@ const RegisterPage = () => {
           type="email"
           variant="outlined"
           value={email}
-          onChange={handleInputChange}
+          onChange={(e) => onInputChange(e)}
           required
         />
-
-        {/* <TextField
-          label="Password"
-          name="password"
-          type="password"
-          variant="outlined"
-          value={password}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-          variant="outlined"
-          value={confirmPassword}
-          onChange={handleInputChange}
-          required
-        /> */}
         <Button
           type="submit"
           variant="contained"
@@ -138,6 +118,14 @@ const RegisterPage = () => {
           style={{ backgroundColor: '#004d40' }}
         >
           Register
+        </Button>
+        <Button
+          type="cancel"
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: '#ff0000', opacity: '85%' }}
+        >
+          Cancel
         </Button>
       </form>
     </div>

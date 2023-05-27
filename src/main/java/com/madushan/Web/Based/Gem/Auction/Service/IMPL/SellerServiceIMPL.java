@@ -35,12 +35,13 @@ public class SellerServiceIMPL implements SellerService {
 
     @Override
     public List<SellerDTO> getSellers() {
-        List<Seller> allseller = sellerRepository.findAll();
+//          Entity
+        List<Seller> allSeller = sellerRepository.findAll();
 
-        if (allseller.size() > 0 ) {
+        if (allSeller.size() > 0 ) {
             List<SellerDTO> sellerDTOList = new ArrayList<>();
-
-            for (Seller seller : allseller) {
+//          convert to DTO
+            for (Seller seller : allSeller) {
                 SellerDTO sellerDTO = new SellerDTO(
                         seller.getSellerId(),
                         seller.getFirstName(),
