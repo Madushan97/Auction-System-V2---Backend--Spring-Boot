@@ -8,15 +8,12 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
 
-@Table(name = "seller")
+@Table(name = "users")
 @TypeDefs(
         @TypeDef(name = "json", typeClass = JsonType.class)
 )
@@ -24,11 +21,11 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Seller {
-
+public class User {
     @Id
-    @Column(name = "seller_id", length = 45)
-    private String sellerId;
+    @Column(name = "user_id", length = 45)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;
 
     @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
@@ -43,13 +40,10 @@ public class Seller {
     private String address;
 
     @Type(type = "json")
-    @Column(name = "contact_numbers", nullable = false, columnDefinition = "json")
+    @Column(name = "contact_numbers", columnDefinition = "json")
     private ArrayList contactNumbers;
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
-
-    @Column(name = "seller_status", columnDefinition = "TINYINT default 0")
-    private boolean isActive;
 
 }

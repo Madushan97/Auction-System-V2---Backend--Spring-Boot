@@ -21,8 +21,10 @@ const Navbar = () => {
         </Typography>
         <Stack direction="row" spacing={1}>
           <Button color="inherit">Features</Button>
-          <Button color="inherit">Pricing</Button>
-          <Button color="inherit">About</Button>
+          <Button color="inherit">Bids</Button>
+          <Button color="inherit">Sell</Button>
+          <Button color="inherit">Help</Button>
+          <Button color="inherit">Contact Us</Button>
           <Button color="inherit">Login</Button>
         </Stack>
       </Toolbar>

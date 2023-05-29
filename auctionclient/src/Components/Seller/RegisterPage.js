@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Typography } from '@mui/material';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,26 +27,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RegisterPage = () => {
+  let navigate = useNavigate();
+
   const classes = useStyles();
-  const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    nic: '',
-    email: '',
+
+  const [seller, setSeller] = useState({
+    firstName: '',
+    lastName: '',
+    NIC: '',
     address: '',
-    contactnumber: '',
-    password: '',
-    confirmPassword: '',
+    contactNumbers: [''],
+    email: '',
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  const { firstName, lastName, NIC, email, address, contactNumbers } = seller;
+
+  const onInputChange = (e) => {
+    setSeller({ ...seller, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (event) => {
+  // POSt using axios
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    await axios.post('http://localhost:8088/api/v1/seller/saveseller', seller);
+    navigate('/');
   };
 
   return (
@@ -55,29 +61,45 @@ const RegisterPage = () => {
       >
         Seller Registration
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit}>
+      <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
         <TextField
           label="First Name"
-          name="firstname"
+          name="firstName"
           variant="outlined"
-          value={formData.firstname}
-          onChange={handleInputChange}
+          value={firstName}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
           label="Last Name"
-          name="lastname"
+          name="lastName"
           variant="outlined"
-          value={formData.lastname}
-          onChange={handleInputChange}
+          value={lastName}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
           label="NIC"
-          name="nic"
+          name="NIC"
           variant="outlined"
-          value={formData.nic}
-          onChange={handleInputChange}
+          value={NIC}
+          onChange={(e) => onInputChange(e)}
+          required
+        />
+        <TextField
+          label="Address"
+          name="address"
+          variant="outlined"
+          value={address}
+          onChange={(e) => onInputChange(e)}
+          required
+        />
+        <TextField
+          label="Contact Number"
+          name="contactNumbers"
+          variant="outlined"
+          value={contactNumbers}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <TextField
@@ -85,42 +107,8 @@ const RegisterPage = () => {
           name="email"
           type="email"
           variant="outlined"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Address"
-          name="address"
-          variant="outlined"
-          value={formData.address}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Contact Number"
-          name="contactnumber"
-          variant="outlined"
-          value={formData.contactnumber}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Password"
-          name="password"
-          type="password"
-          variant="outlined"
-          value={formData.password}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-          variant="outlined"
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
+          value={email}
+          onChange={(e) => onInputChange(e)}
           required
         />
         <Button
@@ -130,6 +118,14 @@ const RegisterPage = () => {
           style={{ backgroundColor: '#004d40' }}
         >
           Register
+        </Button>
+        <Button
+          type="cancel"
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: '#ff0000', opacity: '85%' }}
+        >
+          Cancel
         </Button>
       </form>
     </div>
