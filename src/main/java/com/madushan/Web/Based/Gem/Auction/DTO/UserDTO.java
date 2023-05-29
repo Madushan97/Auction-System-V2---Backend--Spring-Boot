@@ -8,9 +8,9 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SellerDTO {
+public class UserDTO {
 
-    private int sellerId;
+    private int userId;
     private String firstName;
     private String lastName;
     private String NIC;

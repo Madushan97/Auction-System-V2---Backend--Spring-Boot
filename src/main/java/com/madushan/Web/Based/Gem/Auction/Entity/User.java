@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @Entity
 
-@Table(name = "seller")
+@Table(name = "users")
 @TypeDefs(
         @TypeDef(name = "json", typeClass = JsonType.class)
 )
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Seller {
+public class User {
     @Id
-    @Column(name = "seller_id", length = 45)
+    @Column(name = "user_id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int sellerId;
+    private int userId;
 
     @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
