@@ -1,6 +1,7 @@
 package com.madushan.Web.Based.Gem.Auction.Controller;
 
-import com.madushan.Web.Based.Gem.Auction.DTO.UserDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.Request.UpdateUserDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.Request.UserDTO;
 import com.madushan.Web.Based.Gem.Auction.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,13 @@ public class UserController {
 
         List<UserDTO> allUsers = userService.getUsers();
         return allUsers;
+    }
+
+    @PutMapping("/update")
+    public UserDTO updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
+
+        UserDTO userDTO = userService.updateUser(updateUserDTO);
+        return userDTO;
     }
 
 }
