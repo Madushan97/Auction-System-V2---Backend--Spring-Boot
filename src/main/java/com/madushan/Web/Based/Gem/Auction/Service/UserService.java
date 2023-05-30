@@ -12,4 +12,8 @@ public interface UserService {
     List<UserDTO> getUsers();
 
     UserDTO updateUser(UpdateUserDTO updateUserDTO);
+
+    UserDTO getUserById(int userId);
+
+    void removeUser(int userId);
 }

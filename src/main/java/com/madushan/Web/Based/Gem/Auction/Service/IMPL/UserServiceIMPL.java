@@ -79,4 +79,29 @@ public class UserServiceIMPL implements UserService {
             throw new RuntimeException("There is no user call "+ updateUserDTO.getFirstName() + " " + updateUserDTO.getLastName());
         }
     }
+
+    @Override
+    public UserDTO getUserById(int userId) {
+
+        if (userRepository.existsById(userId)) {
+
+            User getUserById = userRepository.getReferenceById(userId);
+
+            UserDTO userDTO = modelMapper.map(getUserById, UserDTO.class);
+
+            return userDTO;
+        } else {
+            throw new RuntimeException("There is no user for :" + userId);
+        }
+    }
+
+    @Override
+    public void removeUser(int userId) {
+
+        if (userRepository.existsById(userId)){
+            userRepository.deleteById(userId);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
 }
