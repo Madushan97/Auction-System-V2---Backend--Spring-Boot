@@ -1,6 +1,7 @@
 package com.madushan.Web.Based.Gem.Auction.Service.IMPL;
 
-import com.madushan.Web.Based.Gem.Auction.DTO.UserDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.Request.UpdateUserDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.Request.UserDTO;
 import com.madushan.Web.Based.Gem.Auction.Entity.User;
 import com.madushan.Web.Based.Gem.Auction.Repository.UserRepository;
 import com.madushan.Web.Based.Gem.Auction.Service.UserService;
@@ -55,6 +56,27 @@ public class UserServiceIMPL implements UserService {
             return sellerDTOList;
         } else {
             throw new RuntimeException("No Sellers in database");
+        }
+    }
+
+    @Override
+    public UserDTO updateUser(UpdateUserDTO updateUserDTO) {
+
+        if (userRepository.existsById(updateUserDTO.getUserId())) {
+
+            User updateUser = userRepository.getReferenceById(updateUserDTO.getUserId());
+
+            updateUser.setFirstName(updateUserDTO.getFirstName());
+            updateUser.setLastName(updateUserDTO.getLastName());
+            updateUser.setEmail(updateUserDTO.getEmail());
+
+            userRepository.save(updateUser);
+
+            UserDTO userDTO = modelMapper.map(updateUser, UserDTO.class);
+
+            return userDTO;
+        } else {
+            throw new RuntimeException("There is no user call "+ updateUserDTO.getFirstName() + " " + updateUserDTO.getLastName());
         }
     }
 }

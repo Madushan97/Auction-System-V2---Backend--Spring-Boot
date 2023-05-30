@@ -1,21 +1,16 @@
-package com.madushan.Web.Based.Gem.Auction.DTO;
+package com.madushan.Web.Based.Gem.Auction.DTO.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.ArrayList;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class UserDTO {
+public class UpdateUserDTO {
 
     private int userId;
     private String firstName;
     private String lastName;
-    private String NIC;
-    private String address;
-    private ArrayList contactNumbers;
     private String email;
-
 }
