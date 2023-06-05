@@ -1,7 +1,7 @@
 import AdminNavBar from '../Admin/AdminNavBar';
 import Navbar from '../Navbar';
-import RegisterPage from '../Seller/RegisterPage';
-import SellerList from '../Seller/SellerList';
+// import RegisterPage from '../Seller/RegisterPage';
+// import SellerList from '../Seller/SellerList';
 
 const ROLE = 'user';
 

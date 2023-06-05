@@ -2,16 +2,12 @@ import React from 'react';
 import {
   AppBar,
   Button,
-  IconButton,
+  // IconButton,
   Stack,
   Toolbar,
-  Typography,
+  // Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-
-const seller = () => {
-  <Link to={'/sellerlist'} />;
-};
 
 const AdminNavBar = () => {
   return (
@@ -21,12 +17,11 @@ const AdminNavBar = () => {
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <Button color="inherit">Home</Button>
           </Link>
-          <Button color="inherit">Buyers</Button>
           <Link
             to="/sellerlist"
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
-            <Button color="inherit">Sellers</Button>
+            <Button color="inherit">Users</Button>
           </Link>
 
           <Button color="inherit">Gems</Button>
