@@ -40,15 +40,7 @@ public class UserServiceIMPL implements UserService {
 
 //          convert to DTO
             for (User seller : allUsers) {
-                UserDTO sellerDTO = new UserDTO(
-                        seller.getUserId(),
-                        seller.getFirstName(),
-                        seller.getLastName(),
-                        seller.getNIC(),
-                        seller.getAddress(),
-                        seller.getContactNumbers(),
-                        seller.getEmail()
-                );
+                UserDTO sellerDTO = modelMapper.map(allUsers, UserDTO.class);
 
                 sellerDTOList.add(sellerDTO);
             }

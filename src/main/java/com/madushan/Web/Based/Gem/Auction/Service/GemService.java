@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GemService {
     List<GemDTO> getAllGems();
+
+    String saveGem(GemDTO gemDTO);
 }
