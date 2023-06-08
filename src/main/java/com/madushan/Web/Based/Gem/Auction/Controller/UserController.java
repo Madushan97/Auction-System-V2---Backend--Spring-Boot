@@ -3,7 +3,10 @@ package com.madushan.Web.Based.Gem.Auction.Controller;
 import com.madushan.Web.Based.Gem.Auction.DTO.Request.UpdateUserDTO;
 import com.madushan.Web.Based.Gem.Auction.DTO.Request.UserDTO;
 import com.madushan.Web.Based.Gem.Auction.Service.UserService;
+import com.madushan.Web.Based.Gem.Auction.Util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,33 +21,43 @@ public class UserController {
 
 //    save user
     @PostMapping("/saveuser")
-    public String saveUser(@RequestBody UserDTO sellerDTO) {
+    public ResponseEntity<StandardResponse> saveUser(@RequestBody UserDTO sellerDTO) {
 
         userService.saveUser(sellerDTO);
-        return "Done saving";
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Successfully Created", sellerDTO),HttpStatus.CREATED
+                );
     }
 
 //    get all users
     @GetMapping("/getallusers")
-    public List<UserDTO> getUsers() {
+    public ResponseEntity<StandardResponse> getUsers() {
 
         List<UserDTO> allUsers = userService.getUsers();
-        return allUsers;
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", allUsers), HttpStatus.OK
+        );
     }
 
-//    update user
+//    update user's first,last name, email
     @PutMapping("/update")
-    public UserDTO updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
+    public ResponseEntity<StandardResponse> updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
 
         UserDTO userDTO = userService.updateUser(updateUserDTO);
-        return userDTO;
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", userDTO), HttpStatus.OK
+        );
     }
+//    TODO -> must develop endpoint for update all the attributes
 
 //    get by ID
     @GetMapping(value = "/getById/{id}")
-    public UserDTO userGetById(@PathVariable(value = "id") int userId) {
+    public ResponseEntity<StandardResponse> userGetById(@PathVariable(value = "id") int userId) {
 
-        return userService.getUserById(userId);
+        UserDTO userDTO = userService.getUserById(userId);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", userDTO), HttpStatus.OK
+        );
 
     }
 
@@ -53,10 +66,12 @@ public class UserController {
             path = "/delete",
             params = {"id"}
     )
-    public String deleteUser(@RequestParam(value = "id") int userId) {
+    public ResponseEntity<StandardResponse> deleteUser(@RequestParam(value = "id") int userId) {
 
-        userService.removeUser(userId);
-        return "User :"+ userId +" delete successfully";
+        String deleteMessage = userService.removeUser(userId);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(204, "Successfully Deleted", deleteMessage), HttpStatus.OK
+        );
     }
 
 }

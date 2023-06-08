@@ -96,12 +96,13 @@ public class UserServiceIMPL implements UserService {
     }
 
     @Override
-    public void removeUser(int userId) {
+    public String removeUser(int userId) {
 
         if (userRepository.existsById(userId)){
             userRepository.deleteById(userId);
         } else {
             throw new RuntimeException("User not found");
         }
+        return null;
     }
 }

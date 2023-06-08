@@ -24,4 +24,11 @@ public class GemController {
         List<GemDTO> gemDTOList = gemService.getAllGems();
         return gemDTOList;
     }
+
+//    gem get by ID
+
+
+//    delete gem
+
+//    update gem
 }
