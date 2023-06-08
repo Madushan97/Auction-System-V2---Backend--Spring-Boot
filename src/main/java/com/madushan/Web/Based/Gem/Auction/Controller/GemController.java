@@ -22,5 +22,11 @@ public class GemController {
         return gemDTOList;
     }
 
+//    TODO
+//    gem get by ID
+//    update gem
+//    remove gem
+//    save
+
 
 }
