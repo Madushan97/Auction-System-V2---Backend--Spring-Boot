@@ -21,6 +21,14 @@ public class GemServiceIMPL implements GemService {
     private ModelMapper modelMapper;
 
     @Override
+    public String saveGem(GemDTO gemDTO) {
+
+        Gem gem = modelMapper.map(gemDTO, Gem.class);
+        gemRepository.save(gem);
+        return null;
+    }
+
+    @Override
     public List<GemDTO> getAllGems() {
 //        entity
         List<Gem> allGems = gemRepository.findAll();
@@ -30,24 +38,7 @@ public class GemServiceIMPL implements GemService {
             List<GemDTO> gemDTOList = new ArrayList<>();
 
             for (Gem gem : allGems ) {
-                GemDTO gemDTO = new GemDTO(
-                  gem.getGemId(),
-                  gem.getGemName(),
-                  gem.getDescription(),
-                  gem.getImages(),
-                  gem.getCertification(),
-                  gem.getStartingBid(),
-                  gem.getReservePrice(),
-                  gem.getBiddingIncrement(),
-                  gem.getTimeRemaining(),
-                  gem.getSellerInformation(),
-                  gem.getShippingDetails(),
-                  gem.getPaymentOption(),
-                  gem.getAuctionHistory(),
-                  gem.getBuyersPremium(),
-                  gem.getBidNotification(),
-                  gem.getAuctionConditions()
-                );
+                GemDTO gemDTO = modelMapper.map(allGems,GemDTO.class);
                 gemDTOList.add(gemDTO);
             }
             return gemDTOList;
@@ -56,4 +47,7 @@ public class GemServiceIMPL implements GemService {
         }
 
     }
+
+
+
 }

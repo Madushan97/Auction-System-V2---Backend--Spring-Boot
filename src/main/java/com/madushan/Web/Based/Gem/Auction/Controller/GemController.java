@@ -3,10 +3,7 @@ package com.madushan.Web.Based.Gem.Auction.Controller;
 import com.madushan.Web.Based.Gem.Auction.DTO.GemDTO;
 import com.madushan.Web.Based.Gem.Auction.Service.GemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,10 +22,5 @@ public class GemController {
         return gemDTOList;
     }
 
-//    gem get by ID
 
-
-//    delete gem
-
-//    update gem
 }
