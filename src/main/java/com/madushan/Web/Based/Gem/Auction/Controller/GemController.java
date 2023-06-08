@@ -22,9 +22,5 @@ public class GemController {
         return gemDTOList;
     }
 
-    @PostMapping(path = "/savegem")
-    public String saveGem(@RequestBody GemDTO gemDTO) {
-        gemService.saveGem(gemDTO);
-        return "Gem " + gemDTO.getGemId() + " is saved";
-    }
+
 }
