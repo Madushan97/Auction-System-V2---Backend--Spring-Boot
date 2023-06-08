@@ -16,4 +16,6 @@ public interface UserService {
     UserDTO getUserById(int userId);
 
     String removeUser(int userId);
+
+    UserDTO updateAllFields(UserDTO userDTO);
 }

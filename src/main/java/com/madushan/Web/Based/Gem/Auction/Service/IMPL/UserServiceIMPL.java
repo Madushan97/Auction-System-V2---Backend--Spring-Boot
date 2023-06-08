@@ -97,4 +97,22 @@ public class UserServiceIMPL implements UserService {
         }
         return null;
     }
+
+    @Override
+    public UserDTO updateAllFields(UserDTO userDTO) {
+
+        if (userRepository.existsById(userDTO.getUserId())) {
+
+            User user = userRepository.getReferenceById(userDTO.getUserId());
+
+            User updateUser = modelMapper.map(userDTO, User.class);
+            userRepository.save(updateUser);
+
+            UserDTO userDTO1 = modelMapper.map(updateUser, UserDTO.class);
+            return userDTO1;
+        } else {
+
+            throw new RuntimeException("No user for ID : " + userDTO.getUserId());
+        }
+    }
 }

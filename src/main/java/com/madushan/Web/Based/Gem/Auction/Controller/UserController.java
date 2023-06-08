@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
 
 //    save user
-    @PostMapping("/saveuser")
+    @PostMapping("/save-user")
     public ResponseEntity<StandardResponse> saveUser(@RequestBody UserDTO sellerDTO) {
 
         userService.saveUser(sellerDTO);
@@ -30,7 +30,7 @@ public class UserController {
     }
 
 //    get all users
-    @GetMapping("/getallusers")
+    @GetMapping("/get-all-users")
     public ResponseEntity<StandardResponse> getUsers() {
 
         List<UserDTO> allUsers = userService.getUsers();
@@ -49,6 +49,16 @@ public class UserController {
         );
     }
 //    TODO -> must develop endpoint for update all the attributes
+    @PutMapping("/update-all-fields")
+    public ResponseEntity<StandardResponse> updateUserAllFields(@RequestBody UserDTO userDTO) {
+
+        UserDTO userDTO1 = userService.updateAllFields(userDTO);
+
+        return new ResponseEntity<StandardResponse>(
+          new StandardResponse(200, "Successfully Updated", userDTO1), HttpStatus.OK
+        );
+
+    }
 
 //    get by ID
     @GetMapping(value = "/getById/{id}")
