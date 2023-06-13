@@ -8,4 +8,6 @@ public interface GemService {
     List<GemDTO> getAllGems();
 
     String saveGem(GemDTO gemDTO);
+
+    GemDTO gemGetById(int gemId);
 }

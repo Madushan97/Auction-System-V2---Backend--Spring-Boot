@@ -29,6 +29,19 @@ public class GemServiceIMPL implements GemService {
     }
 
     @Override
+    public GemDTO gemGetById(int gemId) {
+
+        if (gemRepository.existsById(gemId)) {
+
+            Gem gem = gemRepository.getReferenceById(gemId);
+            GemDTO gemGetById = modelMapper.map(gem, GemDTO.class);
+            return gemGetById;
+        } else {
+            throw new RuntimeException("Gem not found for ID : " + gemId);
+        }
+    }
+
+    @Override
     public List<GemDTO> getAllGems() {
 //        entity
         List<Gem> allGems = gemRepository.findAll();
