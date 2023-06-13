@@ -1,6 +1,7 @@
 package com.madushan.Web.Based.Gem.Auction.Controller;
 
 import com.madushan.Web.Based.Gem.Auction.DTO.GemDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.Request.UpdateGemDTO;
 import com.madushan.Web.Based.Gem.Auction.Service.GemService;
 import com.madushan.Web.Based.Gem.Auction.Util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,17 +42,49 @@ public class GemController {
                  new StandardResponse(200, "Gem Id :" + gemId + " Details Getting successfully", gemDTO), HttpStatus.OK
                  );
     }
+//     save gem
+    @PostMapping( path = "/save-gem")
+    public ResponseEntity<StandardResponse> saveGem(GemDTO gemDTO) {
+
+        gemService.saveGem(gemDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(201, "Successfully Created", gemDTO), HttpStatus.CREATED
+        );
+    }
 
 
-//    update gem
+//    update all gem attributes
+    @PutMapping(path = "/update-gem-details")
+    public ResponseEntity<StandardResponse> updateGem(@RequestBody GemDTO gemDTO) {
 
+        GemDTO gemDTO1 = gemService.updateGem(gemDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(208, "Successfully Updated", gemDTO1), HttpStatus.CREATED
+        );
+    }
 
+//        update only Gem details
+    @PutMapping(path = "/update-gem-only")
+    public ResponseEntity<StandardResponse> updateGemDetails(@RequestBody UpdateGemDTO updateGemDTO) {
+
+        GemDTO updateGemDTO1 = gemService.updateGemDetails(updateGemDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(208, "Successfully Updated", updateGemDTO1), HttpStatus.CREATED
+        );
+    }
 
 //    remove gem
+    @DeleteMapping(path = "/delete-gem/{id}")
+    public ResponseEntity<StandardResponse> deleteGemById (@PathVariable(value = "id") int gemId) {
+
+        String deleted = gemService.deleteGemById(gemId);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Successfully Deleted", deleted), HttpStatus.OK
+        );
+    }
 
 
 
-//    save gem
 
 
 }

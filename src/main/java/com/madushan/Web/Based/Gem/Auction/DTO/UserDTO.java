@@ -1,4 +1,4 @@
-package com.madushan.Web.Based.Gem.Auction.DTO.Request;
+package com.madushan.Web.Based.Gem.Auction.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

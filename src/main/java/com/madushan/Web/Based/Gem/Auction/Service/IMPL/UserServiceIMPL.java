@@ -1,7 +1,7 @@
 package com.madushan.Web.Based.Gem.Auction.Service.IMPL;
 
 import com.madushan.Web.Based.Gem.Auction.DTO.Request.UpdateUserDTO;
-import com.madushan.Web.Based.Gem.Auction.DTO.Request.UserDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.UserDTO;
 import com.madushan.Web.Based.Gem.Auction.Entity.User;
 import com.madushan.Web.Based.Gem.Auction.Repository.UserRepository;
 import com.madushan.Web.Based.Gem.Auction.Service.UserService;
@@ -41,7 +41,7 @@ public class UserServiceIMPL implements UserService {
 
 //          convert to DTO
             for (User seller : allUsers) {
-                UserDTO sellerDTO = modelMapper.map(allUsers, UserDTO.class);
+                UserDTO sellerDTO = modelMapper.map(seller, UserDTO.class);
 
                 sellerDTOList.add(sellerDTO);
             }
