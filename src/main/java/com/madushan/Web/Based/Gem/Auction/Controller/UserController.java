@@ -1,7 +1,7 @@
 package com.madushan.Web.Based.Gem.Auction.Controller;
 
 import com.madushan.Web.Based.Gem.Auction.DTO.Request.UpdateUserDTO;
-import com.madushan.Web.Based.Gem.Auction.DTO.Request.UserDTO;
+import com.madushan.Web.Based.Gem.Auction.DTO.UserDTO;
 import com.madushan.Web.Based.Gem.Auction.Service.UserService;
 import com.madushan.Web.Based.Gem.Auction.Util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
